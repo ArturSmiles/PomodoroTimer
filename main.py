@@ -2,6 +2,7 @@ import time
 import threading
 from pathlib import Path
 from tkinter import Tk, Canvas, Button, PhotoImage
+import winsound
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -144,6 +145,7 @@ class PomodorTimer:
     def start_timer_thread(self):
         if not self.running:
             t = threading.Thread(target=self.start_timer)
+            t.daemon = True
             t.start()
             self.running = True
 
@@ -162,6 +164,7 @@ class PomodorTimer:
                 time.sleep(1)
                 self.full_seconds -= 1
             if not self.stopped:
+                winsound.Beep(500, 200)
                 self.stop_clicked = False
                 self.counter += 1
                 self.canvas.itemconfigure(
@@ -185,6 +188,7 @@ class PomodorTimer:
                 time.sleep(1)
                 self.full_seconds -= 1
             if not self.stopped:
+                winsound.Beep(1000, 200)
                 self.stop_clicked = False
                 self.timer_id = 0
                 self.canvas.itemconfigure(
@@ -203,6 +207,7 @@ class PomodorTimer:
                 time.sleep(1)
                 self.full_seconds -= 1
             if not self.stopped:
+                winsound.Beep(1000, 200)
                 self.stop_clicked = False
                 self.timer_id = 0
                 self.canvas.itemconfigure(
